@@ -1,0 +1,15 @@
+.popup__container_cover {
+  justify-content: center;
+  max-width: 75vw;
+  max-height: 75vh;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+}
+
+@media screen and (max-width: 529px) {
+  .popup__container_cover {
+    max-width: 75vw;
+    padding: 0;
+  }
+}

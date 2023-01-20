@@ -1,0 +1,25 @@
+.page__container {
+  background-color: #000;
+  font-family: "Inter", "Arial", sans-serif;
+  color: #fff;
+  max-width: 880px;
+  margin: 0 auto 0;
+}
+
+@media screen and (max-width: 1023px) {
+  .page__container {
+    max-width: calc(100% - 124px);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .page__container {
+    max-width: calc(100% - 72px);
+  }
+}
+
+@media screen and (max-width: 424px) {
+  .page__container {
+    max-width: 100%;
+  }
+}

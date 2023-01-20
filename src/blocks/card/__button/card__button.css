@@ -1,0 +1,14 @@
+.card__button {
+  width: 22px;
+  height: 19px;
+  padding: 0;
+  background-image: url("../../../images/card__reaction.svg");
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: opacity .1s linear;
+}
+
+.card__button:hover {
+  opacity: .5;
+}

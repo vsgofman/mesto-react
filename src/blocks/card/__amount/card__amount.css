@@ -1,0 +1,10 @@
+.card__amount {
+  width: 10px;
+  height: 13px;
+  margin: 3px auto 0px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #000;
+  text-align: center;
+}

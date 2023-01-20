@@ -1,0 +1,20 @@
+.profile__photo {
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__photo {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media screen and (max-width: 509px) {
+  .profile__photo {
+    width: 120px;
+    height: 120px;
+  }
+}
