@@ -1,15 +1,18 @@
 function PopupWithForm(props) {
   return (
     <div className={`popup popup_${props.name}`}>
-    <div class="popup__container">
-      <button class="popup__close" type="button"  aria-label="Закрыть попап"></button>
-        <h2 class="popup__title">{props.title}</h2>
-        <form class="form popup__form popup__form_" name={props.name} novalidate>
-          <button class="popup__button popup__save" type="submit" aria-label="?">?</button>
+    <div className="popup__container">
+      <button className="popup__close" type="button"  aria-label="Закрыть попап"></button>
+        <h2 className="popup__title">{props.title}</h2>
+        <form className="form popup__form" name={props.name}>
+          {props.children}
+          <button className="popup__button popup__save" type="submit" aria-label={props.textButton}>{props.textButton}</button>
         </form>
     </div>
   </div>
   )
 }
 
-// 47:25
+export default PopupWithForm
+
+// 01:49:40
