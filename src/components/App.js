@@ -4,25 +4,29 @@ import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import { useState } from 'react';
+import { useEffect } from 'react';
+
 
 function App() {
-  // const [isEditProfilePopupOpened, setIsEditProfilePopupOpened] = useState(false);
-  // function handleEditProfileClick() {
-  //   setIsEditProfilePopupOpened(true);
-  // }
-  const popupEdit = document.querySelector('.popup_edit');
-  let isEditProfilePopupOpen = false;
-
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   function handleEditProfileClick() {
-    isEditProfilePopupOpen = true;
+    setIsEditProfilePopupOpen(true);
   }
 
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   function handleEditAvatarClick() {
-    document.querySelector('.popup_avatar').classList.add('popup_opened');
+    setIsEditAvatarPopupOpen(true);
   }
-  
+
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   function handleAddPlaceClick() {
-    document.querySelector('.popup_add').classList.add('popup_opened');
+    setIsAddPlacePopupOpen(true);
+  }
+
+  function closeAllPopups() {
+    setIsEditProfilePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setIsAddPlacePopupOpen(false);
   }
 
   return (
@@ -42,6 +46,8 @@ function App() {
           title="Редактировать профиль"
           name="edit"
           textButton="Сохранить"
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
           children=
           {<>
             <div className="form__container">
@@ -59,6 +65,8 @@ function App() {
           title="Новое место"
           name="add"
           textButton="Создать"
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
           children=
           {<>
             <div className="form__container">
@@ -76,6 +84,8 @@ function App() {
           title="Обновить аватар"
           name="avatar"
           textButton="Сохранить"
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
           children=
           {<>
             <div className="form__container">
@@ -92,20 +102,6 @@ function App() {
           children={<></>}
         />
         <ImagePopup />
-
-  <template id="card-template">
-    <article className="cards__item card">
-      <img className="card__photo" src="#" alt="фото места" />
-      <button className="card__button_remove" id="button__remove" type="button" name="remove"></button>
-      <div className="card__caption">
-        <h2 className="card__name"></h2>
-        <div className="card__like">
-          <button className="card__button" id="button__like" type="button"></button>
-          <p className="card__amount"></p>
-        </div>
-      </div>
-    </article>
-  </template>
     </div>
   </div>
   );
