@@ -4,29 +4,23 @@ import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import { useState } from 'react';
-import { useEffect } from 'react';
-
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
-  function handleEditProfileClick() {
-    setIsEditProfilePopupOpen(true);
-  }
-
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-  function handleEditAvatarClick() {
-    setIsEditAvatarPopupOpen(true);
-  }
-
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
-  function handleAddPlaceClick() {
-    setIsAddPlacePopupOpen(true);
-  }
+  const [isSelectedCard, setIsSelectedCard] = useState(false);
+
+  function handleEditProfileClick() { setIsEditProfilePopupOpen(true); }
+  function handleEditAvatarClick() { setIsEditAvatarPopupOpen(true); }
+  function handleAddPlaceClick() { setIsAddPlacePopupOpen(true); }
+  function handleCardClick(card) { setIsSelectedCard(card); }
 
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsAddPlacePopupOpen(false);
+    setIsSelectedCard(false);
   }
 
   return (
@@ -38,6 +32,7 @@ function App() {
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleAddPlaceClick}
             onEditAvatar={handleEditAvatarClick}
+            onCardClick={handleCardClick}
           />
           <Footer />
         </div>
@@ -51,11 +46,11 @@ function App() {
           children=
           {<>
             <div className="form__container">
-              <input id="name-input" className="form__input popup__input popup__input_content_name" type="text" name="name" placeholder="Имя" minlength="2" maxlength="40" required />
+              <input id="name-input" className="form__input popup__input popup__input_content_name" type="text" name="name" placeholder="Имя" minLength="2" maxLength="40" required />
               <span className="popup__error popup__error_name-input"></span>
             </div>
             <div className="form__container">
-              <input id="job-input" className="form__input popup__input popup__input_content_job" type="text" name="job" placeholder="Профессия" minlength="2" maxlength="200" required />
+              <input id="job-input" className="form__input popup__input popup__input_content_job" type="text" name="job" placeholder="Профессия" minLength="2" maxLength="200" required />
               <span className="popup__error popup__error_job-input"></span>
             </div>
           </>}
@@ -70,7 +65,7 @@ function App() {
           children=
           {<>
             <div className="form__container">
-              <input id="card-name" className="popup__input popup__input_card_name" type="text" name="card_name" placeholder="Название" minlength="2" maxlength="30" required />
+              <input id="card-name" className="popup__input popup__input_card_name" type="text" name="card_name" placeholder="Название" minLength="2" maxLength="30" required />
               <span className="popup__error popup__error_card-name"></span>
             </div>
             <div className="form__container">
@@ -101,9 +96,9 @@ function App() {
           textButton="Да"
           children={<></>}
         />
-        <ImagePopup />
+        <ImagePopup card={isSelectedCard} onClose={closeAllPopups} />
+      </div>
     </div>
-  </div>
   );
 }
 

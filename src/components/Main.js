@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import React from 'react';
 import api from '../utils/Api';
+import Card from './Card';
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
   const [userName, setUserName] = useState('');
   const [userDescription, setUserDescription] = useState('');
   const [userAvatar, setUserAvatar] = useState('');
@@ -13,7 +14,6 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
       api.getProfile(),
       api.getInitialCards()
     ]).then((values) => {
-      console.log(values)
       setUserName(values[0].name)
       setUserDescription(values[0].about)
       setUserAvatar(values[0].avatar)
@@ -42,17 +42,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
       <section className="cards content__cards">
         {
           cards.map((card, i) => (
-            <article className="cards__item card" key={card._id}>
-              <img className="card__photo" src={card.link} alt="фото места" />
-              <button className="card__button_remove" id="button__remove" type="button" name="remove"></button>
-              <div className="card__caption">
-                <h2 className="card__name">{card.name}</h2>
-                <div className="card__like">
-                  <button className="card__button" id="button__like" type="button"></button>
-                  <p className="card__amount">{card.likes.length}</p>
-                </div>
-              </div>
-            </article>
+            <Card card={card} onCardClick={onCardClick} key={card._id}/>
           ))
         }
       </section>
