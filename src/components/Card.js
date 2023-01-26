@@ -8,7 +8,7 @@ function Card(props) {
 
   return (
     <article className="cards__item card">
-      <img className="card__photo" onClick={handleImageClick} src={props.card.link} alt="фото места" />
+      <img className="card__photo" onClick={handleImageClick} src={props.card.link} alt={props.card.name} />
       <button className="card__button_remove" id="button__remove" type="button" name="remove"></button>
       <div className="card__caption">
         <h2 className="card__name">{props.card.name}</h2>
