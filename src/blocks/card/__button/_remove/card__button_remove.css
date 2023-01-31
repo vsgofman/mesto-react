@@ -3,13 +3,8 @@
   right: 15px;
   top: 15px;
   width: 18px;
-  height: 19px;
-  padding: 0;
   background-image: url("../../../../images/card__remove.svg");
   background-color: transparent;
-  border: none;
-  cursor: pointer;
-  transition: opacity .1s linear;
 }
 
 .card__button_remove:hover {

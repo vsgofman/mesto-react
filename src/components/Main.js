@@ -1,38 +1,32 @@
 import { useState } from 'react';
 import React from 'react';
-import api from '../utils/Api';
 import Card from './Card';
+import api from '../utils/Api';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
-  const [userName, setUserName] = useState('');
-  const [userDescription, setUserDescription] = useState('');
-  const [userAvatar, setUserAvatar] = useState('');
-  const [cards, setCards] = useState([]);
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, cards, setCards }) {
+  const currentUser = React.useContext(CurrentUserContext);
 
   React.useEffect(() => {
-    Promise.all([
-      api.getProfile(),
-      api.getInitialCards()
-    ]).then((values) => {
-      setUserName(values[0].name)
-      setUserDescription(values[0].about)
-      setUserAvatar(values[0].avatar)
-      setCards(values[1])
-    }).catch((err) => console.log(`Данные не загрузились. ${err}`))
+    api.getInitialCards()
+      .then((res) => {
+        setCards(res);
+        console.log(res)
+      }).catch((err) => console.log(`Данные не загрузились. ${err}`))
   }, [])
-  
+
   return (
     <main className="content">
       <section className="profile content__profile">
         <div className="profile__block">
           <div className="profile__avatar">
-            <img className="profile__photo" src={userAvatar} alt="Аватар пользователя" />
+            <img className="profile__photo" src={currentUser.avatar} alt="Аватар пользователя" />
             <span className="profile__overlay" onClick={onEditAvatar}></span>
           </div>
           <div className="profile__edit">
             <div className="info profile__info">
-              <h1 className="profile__name">{userName}</h1>
-              <p className="profile__position">{userDescription}</p>
+              <h1 className="profile__name">{currentUser.name}</h1>
+              <p className="profile__position">{currentUser.about}</p>
             </div>
             <button className="profile__button profile__button_edit" onClick={onEditProfile} type="button"></button>
           </div>
@@ -41,8 +35,8 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
       </section>
       <section className="cards content__cards">
         {
-          cards.map((card, i) => (
-            <Card card={card} onCardClick={onCardClick} key={card._id}/>
+         cards.map((card, i) => (
+            <Card card={card} onCardClick={onCardClick} onCardLike={onCardLike} key={card._id} />
           ))
         }
       </section>

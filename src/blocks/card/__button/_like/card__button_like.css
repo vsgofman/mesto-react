@@ -1,0 +1,5 @@
+.card__button_like {
+  width: 22px;
+  background-image: url("../../../../images/card__reaction.svg");
+  background-color: #fff;
+}
