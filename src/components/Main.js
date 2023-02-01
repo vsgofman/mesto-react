@@ -1,19 +1,9 @@
-import { useState } from 'react';
 import React from 'react';
 import Card from './Card';
-import api from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, cards, setCards }) {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onCardDelete, cards }) {
   const currentUser = React.useContext(CurrentUserContext);
-
-  React.useEffect(() => {
-    api.getInitialCards()
-      .then((res) => {
-        setCards(res);
-        console.log(res)
-      }).catch((err) => console.log(`Данные не загрузились. ${err}`))
-  }, [])
 
   return (
     <main className="content">
@@ -35,8 +25,8 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike
       </section>
       <section className="cards content__cards">
         {
-         cards.map((card, i) => (
-            <Card card={card} onCardClick={onCardClick} onCardLike={onCardLike} key={card._id} />
+          cards.map((card, i) => (
+            <Card card={card} onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete} key={card._id} />
           ))
         }
       </section>

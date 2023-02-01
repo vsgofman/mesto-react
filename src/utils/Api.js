@@ -67,28 +67,10 @@ class Api extends React.Component {
   }
 
   changeLikeCardStatus(id, isLiked) {
-    isLiked ? this.addLike(id) : this.deleteLike(id);
-  }
-
-  addLike(id) {
     return fetch(`${this._url}/cards/${id}/likes`, {
-      method: "PUT",
+      method: `${isLiked ? 'PUT' : 'DELETE'}`,
       headers: this._headers
     }).then(res => this._getResponseData(res))
-  }
-
-  deleteLike(id) {
-    return fetch(`${this._url}/cards/${id}/likes`, {
-      method: "DELETE",
-      headers: this._headers
-    })
-      .then(res => this._getResponseData(res))
-  }
-
-  render() {
-    return (
-      '123'
-    )
   }
 }
 
