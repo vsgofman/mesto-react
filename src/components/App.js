@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -18,14 +18,14 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     Promise.all([
       api.getProfile(),
       api.getInitialCards()
     ])
-      .then((res) => {
-        setCurrentUser(res[0]);
-        setCards(res[1]);
+      .then(([userData, cardsData]) => {
+        setCurrentUser(userData);
+        setCards(cardsData);
       }).catch((err) => console.log(`Данные не загрузились. ${err}`))
   }, [])
 
